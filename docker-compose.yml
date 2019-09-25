@@ -1,6 +1,6 @@
 version: '3.7'
 services:
-  app-server:
+  app-usuario:
     image: franciscocfreire/java-usuarios-microservice:latest
     build:
       context: .
@@ -10,6 +10,22 @@ services:
     restart: always
     networks:
       - backend
-
+  app-drone:
+    image: franciscocfreire/java-drone-microservice:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5001:8081"
+    restart: always
+    networks:
+      - backend
+  app-angular:
+    image: franciscocfreire/ang-skyview:1.0
+    ports:
+      - 3000:80
+    networks:
+      - frontend
 networks:
   backend:
+  frontend:

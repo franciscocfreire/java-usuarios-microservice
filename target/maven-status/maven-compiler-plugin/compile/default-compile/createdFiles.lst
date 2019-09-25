@@ -1,5 +1,9 @@
+br\com\fiap\services\ImagemService.class
+br\com\fiap\config\SwaggerConfig.class
 br\com\fiap\controller\UsuarioController.class
 br\com\fiap\Application.class
 br\com\fiap\helper\Helper.class
 br\com\fiap\entity\Usuario.class
+br\com\fiap\services\impl\ImagemServiceImpl.class
+br\com\fiap\domain\Imagem.class
 br\com\fiap\programa\Aplicacao.class

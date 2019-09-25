@@ -15,6 +15,43 @@ public class Helper {
 		this.entityManager = entityManager;
 	}
 
+
+
+	/*@SuppressWarnings("unchecked")
+	public List<Curso> listarCursos() {
+		Query query = entityManager.createQuery("select c from Curso c");
+		return query.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<UsuarioCurso> listarUsuarioCurso() {
+		Query query = entityManager.createQuery("select ac from UsuarioCurso ac");
+		return query.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Escola> listarEscola() {
+		Query query = entityManager.createQuery("select e from Escola e");
+		return query.getResultList();
+	}*/
+
+
+	/*public Curso buscarCurso(int numCurso) {
+		Query query = entityManager
+				.createQuery("select c from Curso c where idCurso = :idCurso");
+		query.setParameter("idCurso", numCurso);
+		Curso curso = (Curso) query.getSingleResult();
+		return curso;
+	}
+
+	public Escola buscarEscola(int codEscola) {
+		Query query = entityManager
+				.createQuery("select e from Escola e where idEscola =:idEscola");
+		query.setParameter("idEscola", codEscola);
+		Escola escola = (Escola) query.getSingleResult();
+		return escola;
+	}
+*/
 	@SuppressWarnings("unchecked")
 	public List<Usuario> listarUsuarios() {
 		Query query = entityManager.createQuery("select a from Usuario a");
@@ -67,6 +104,33 @@ public class Helper {
 		try {
 			entityManager.getTransaction().begin();
 			entityManager.persist(usuario);
+			entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+			throw e;
+		} finally {
+			entityManager.close();
+		}
+	}
+
+	public void updateUsuario(Usuario usuario) throws Exception {
+		try {
+			entityManager.getTransaction().begin();
+			entityManager.merge(usuario);
+			entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+			throw e;
+		} finally {
+			entityManager.close();
+		}
+	}
+
+	public void apagarUsuario(int idUsuario) throws Exception {
+		try {
+			entityManager.getTransaction().begin();
+			Usuario usuario = buscarUsuario(idUsuario);
+			entityManager.remove(usuario);
 			entityManager.getTransaction().commit();
 		} catch (Exception e) {
 			entityManager.getTransaction().rollback();
