@@ -1,22 +1,16 @@
 version: '3.7'
 services:
   app-usuario:
-    image: franciscocfreire/java-usuarios-microservice:latest
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: franciscocfreire/java-usuarios-microservice:1.1
     ports:
       - "5000:8080"
     restart: always
     networks:
       - backend
   app-drone:
-    image: franciscocfreire/java-drone-microservice:latest
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: franciscocfreire/java-drone-microservices:1.3
     ports:
-      - "5001:8081"
+      - "5001:8080"
     restart: always
     networks:
       - backend
